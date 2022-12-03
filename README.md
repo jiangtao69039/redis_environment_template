@@ -1,5 +1,7 @@
 # 说明
-
+基于 docker 搭建 redis cluster
+基于 docker 搭建 redis sentinel
+基于 docker 搭建 redis masterslave
 本文档用于搭建redis cluster/sentinel/masterslave，用于测试使用。
 
 
