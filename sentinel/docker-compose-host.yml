@@ -1,0 +1,98 @@
+version: '3.1'
+
+services:
+  master:
+    privileged: true
+    image: redis
+    container_name: redis-master
+    hostname: redis-master
+    network_mode: host
+    command: redis-server /etc/redis/redis.conf
+    volumes:
+      - "./master/redis.conf:/etc/redis/redis.conf"
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "6379:6379"
+  slave_1:
+    privileged: true
+    image: redis
+    container_name: redis-slave_1
+    hostname: redis-slave_1
+    network_mode: host
+    command: redis-server /etc/redis/redis.conf --slaveof 127.0.0.1 6379
+    volumes:
+      - "./slave1/redis.conf:/etc/redis/redis.conf"
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "6380:6380"
+    depends_on:
+      - master
+  slave_2:
+    privileged: true
+    image: redis
+    container_name: redis-slave_2
+    hostname: redis-slave_2
+    network_mode: host
+    command: redis-server /etc/redis/redis.conf --slaveof 127.0.0.1 6379
+    volumes:
+      - "./slave2/redis.conf:/etc/redis/redis.conf"
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "6381:6381"
+    depends_on:
+      - master
+      - slave_1
+  sentinel_1:
+    privileged: true
+    image: redis
+    container_name: redis-sentinel_1
+    hostname: redis-sentinel_1
+    network_mode: host
+    command: redis-sentinel /etc/redis/sentinel.conf #--sentinel
+    volumes:
+      - "./sentinel1/sentinel.conf:/etc/redis/sentinel.conf"
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "26379:26379"
+    depends_on:
+      - master
+      - slave_1
+      - slave_2
+  sentinel_2:
+    privileged: true
+    image: redis
+    container_name: redis-sentinel_2
+    hostname: redis-sentinel_2
+    network_mode: host
+    command: redis-sentinel /etc/redis/sentinel.conf #--sentinel
+    volumes:
+      - "./sentinel2/sentinel.conf:/etc/redis/sentinel.conf"
+    environment:
+      TZ: Asia/Shangha
+    ports:
+      - "26380:26380"
+    depends_on:
+      - master
+      - slave_1
+      - slave_2
+  sentinel_3:
+    privileged: true
+    image: redis
+    container_name: redis-sentinel_3
+    hostname: redis-sentinel_3
+    network_mode: host
+    command: redis-sentinel /etc/redis/sentinel.conf #--sentinel
+    volumes:
+      - "./sentinel3/sentinel.conf:/etc/redis/sentinel.conf"
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "26381:26381"
+    depends_on:
+      - master
+      - slave_1
+      - slave_2
