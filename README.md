@@ -32,7 +32,7 @@
 * 修改配置文件:   
    1.slave1/redis.conf 最后几行的ip 改为部署机器的ip   
    2.slave2/redis.conf 最后几行的ip 改为部署机器的ip   
-   3.修改sentinel1/sentinel.config,sentinel2/sentinel.config,sentinel3/sentinel.config 最后一行ip为部署机器ip
+   3.修改sentinel1/sentinel.config,sentinel2/sentinel.config,sentinel3/sentinel.config 第66行ip为部署机器ip
    
 * 启动命令: 使用host模式  
   1.docker-compose -f ./docker-compose-host.yml up -d master    
