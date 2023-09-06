@@ -20,7 +20,7 @@ services:
     container_name: redis-slave_1
     hostname: redis-slave_1
     network_mode: host
-    command: redis-server /etc/redis/redis.conf --slaveof 127.0.0.1 6379
+    command: redis-server /etc/redis/redis.conf --slaveof 127.0.0.1 6300
     volumes:
       - "./slave1/redis.conf:/etc/redis/redis.conf"
     environment:
@@ -35,7 +35,7 @@ services:
     container_name: redis-slave_2
     hostname: redis-slave_2
     network_mode: host
-    command: redis-server /etc/redis/redis.conf --slaveof 127.0.0.1 6379
+    command: redis-server /etc/redis/redis.conf --slaveof 127.0.0.1 6300
     volumes:
       - "./slave2/redis.conf:/etc/redis/redis.conf"
     environment:
