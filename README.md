@@ -48,6 +48,10 @@
 
 #### master-slave模式
   占用host端口:  63777,63780,63781
+  进入项目目录后执行下面ip替换命令,下面命令中192.168.3.151(这里填自己机器的ip)    
+  * cd masterslave
+  * find ./ -name "*.conf" |xargs -t -I{} perl -pi -e 's/192.168.4.155/192.168.3.151/g' {}
+
   * 启动命令:   
   1.docker run -d  --publish 63777:6379 --volume ./master/redis.conf:/usr/local/etc/redis/redis.conf --name       redis-ms-master redis:6.0.8 redis-server /usr/local/etc/redis/redis.conf     
   2.docker run -d  --publish 63780:6379 --volume ./slave1/redis.conf:/usr/local/etc/redis/redis.conf --name       redis-ms-slave1 redis:6.0.8 redis-server /usr/local/etc/redis/redis.conf    
